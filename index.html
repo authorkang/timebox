@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Time Box" />
+    <title>Time Box</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#3498db" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Time Box</h1>
+
+        <!-- TAGS -->
+        <div class="section">
+            <h3>Tag Management (Max 5)</h3>
+            <div id="tags"></div>
+
+            <div class="tag-input-group">
+                <input id="tagInput" placeholder="Enter tag (max 5)" maxlength="20" />
+                <select id="tagColor">
+                    <option value="#3498db">Blue</option>
+                    <option value="#e74c3c">Red</option>
+                    <option value="#27ae60">Green</option>
+                    <option value="#f39c12">Orange</option>
+                    <option value="#9b59b6">Purple</option>
+                </select>
+                <button onclick="addTag()">Add</button>
+            </div>
+
+            <div id="tagCount" class="tag-count"></div>
+        </div>
+
+        <!-- TIMER -->
+        <div class="section">
+            <h3>Timer</h3>
+            <div class="timer-group">
+                <button id="toggleBtn" class="timer-btn" onclick="toggleTimer()">Start</button>
+                <div id="currentTimer" class="current-timer">00:00:00</div>
+            </div>
+            <div id="currentTag" class="current-tag"></div>
+        </div>
+
+        <!-- VIEW -->
+        <div class="section">
+            <div class="view-switch">
+                <button id="dayBtn" class="view-btn active" onclick="setView('day')">Day View</button>
+                <button id="weekBtn" class="view-btn" onclick="setView('week')">Week Analysis</button>
+                <button id="monthBtn" class="view-btn" onclick="setView('month')">Month Analysis</button>
+            </div>
+            <div id="currentDate" class="current-date"></div>
+        </div>
+
+        <!-- LOGS -->
+        <div id="logsSection" class="section">
+            <div class="logs-header">
+                <h3>Today's Logs</h3>
+                <button class="settle-btn" onclick="settleToday()">Settle</button>
+            </div>
+            <div id="logsList" class="logs-list"></div>
+            <div id="settlement" class="settlement hidden"></div>
+        </div>
+
+        <!-- WEEK -->
+        <div id="weekAnalysis" class="week-analysis hidden"></div>
+
+        <!-- MONTH -->
+        <div id="monthAnalysis" class="week-analysis hidden"></div>
+    </div>
+
+    <!-- LOG EDIT MODAL -->
+    <div id="logEditModal" class="modal-overlay hidden">
+        <div class="modal">
+            <h3>Edit Log</h3>
+            <div class="modal-group">
+                <label>Tag</label>
+                <select id="editTagSelect"></select>
+            </div>
+            <div class="modal-group">
+                <label>Start Time</label>
+                <input type="datetime-local" id="editStartTime" />
+            </div>
+            <div class="modal-group">
+                <label>End Time</label>
+                <input type="datetime-local" id="editEndTime" />
+            </div>
+            <div class="modal-group">
+                <label>Duration (minutes)</label>
+                <input type="number" id="editDuration" min="1" />
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-danger" onclick="deleteLog()">Delete</button>
+                <button class="modal-btn modal-btn-secondary" onclick="closeLogModal()">Cancel</button>
+                <button class="modal-btn modal-btn-primary" onclick="saveLogEdit()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
